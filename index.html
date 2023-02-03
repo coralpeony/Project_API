@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SunTrack</title>
+    <link rel="stylesheet" href="./assets/css/styles.css" />
+    <link rel="icon" type="image/x-icon" href="./assets/images/favicon.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Karla:wght@200&family=Merriweather&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- header -->
+    <header class="container-fluid text-center text-white p-2 sunTrack-header">
+        <!-- logo with image -->
+        <div class="placeholder-div">
+            <!--placeholder div-->
+        </div>
+        <a href="">
+            <img src="./assets/images/suntrack_logo.png" alt="SunTrack logo">
+        </a>
+        <div class="time-div">
+            <h5 id="time-display"></h5>
+        </div>
+    </header>
+
+    <div class="container-fluid hero-container">
+        <div class="row h-100 justify-content-center align-items-center">
+            <form id="search-form" class="form-group">
+                <div class="input-container">
+                    <input id="search-input" class="form-input rounded w-100 m-1 p-2" type="text"
+                        placeholder="Enter the city name" />
+                    <h2 id="form-heading" class="mt-1 container-fluid text-center text">
+                        Search for a City:
+                    </h2>
+                    <input id="datepicker" class="form-input rounded w-100 m-1 p-2" type="text" autocomplete="off"
+                        placeholder="Choose the date" />
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-warning float-right" id="search-button">
+                        Search
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <!-- Main Section of the page  -->
+
+    <!--Jumbotron with Initial Sunset Image that shows up before users have submitted
+    their input-->
+    <div class="jumbotron jumbotron-fluid" id="initial-image">
+        <div class="container">
+
+            <img class="w-100" src="https://cdn.pixabay.com/photo/2020/12/08/02/20/couple-5813286_1280.jpg">
+        </div>
+    </div>
+
+    <!-- Container that hold 3 cards for the Main Content that will be populated once the search input is done 
+        - map card, sunrise card and sunset card. -->
+    <div class="container-fluid main-content-container">
+        <div class="row">
+            <!-- map card -->
+            <div class="col-md-5">
+                <div class="card map-card">
+                    <img id ="mapimage" src="./assets/images/placeholder-img.png" alt="placeholder image">
+                    <div class="card-body map-content">
+                        <h5 id="map-title" class="card-title">MAP CARD</h5>
+                        <!-- Stops filled content from overflowing -->
+                        <div class="overflow-hidden">
+                            <!-- Placeholder image, for illustrative purposes,
+                            to be deleted once content created. -->
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+            <!-- sunrise and sunset cards -->
+            <div class="col-md-7">
+                <div class="container-fluid main-content-container">
+                    <div class="row">
+                        <!-- sunrise card -->
+                        <div class="col-md-6">
+                            <div class="card sunrise-card">
+                                <div class="card-body sunrise-content">
+                                    <!--!!!!-->
+                                    <audio controls src="https://www.slspencer.com/Sounds/Ringtones/UglyBadGood.m4r"
+                                        controls="true" class="audio-1"></audio>
+                                    <!-- Card title and card text filled for illustrative purposes,
+                                    to be deleted once content created. -->
+                                    <h5 class="card-title" id="sunrise-card">SUNRISE CARD</h5>
+                                    <p class="card-text">Experience the breathtaking beauty of a sunrise as the sky
+                                        transforms into a symphony of warm hues, marking the start of a new day.
+                                    </p>
+                                    <ul class="sunrise-times">
+                                        <li>First Light Time: <span id="first-light"></span></li>
+                                        <li>Dawn Time: <span id="dawn-time"></span></li>
+                                        <li>Sunrise Time: <span id="sunrise"></span></li>
+
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div></div>
+                        <!-- sunset card -->
+                        <div class="col-md-6">
+                            <div class="card sunset-card" style="width: 100%;">
+                                <div class="card-body sunset-content">
+                                    <audio controls src="https://www.slspencer.com/Sounds/Ringtones/Xtones.m4r"
+                                        controls="true" class="audio-1"></audio>
+                                    <!-- Card title and card text filled for illustrative purposes,
+                                    to be deleted once content created. -->
+                                    <h5 class="card-title" id="sunset-card">SUNSET CARD</h5>
+                                    <p class="card-text">Admire the captivating spectacle of a sunset as the sun dips
+                                        below the horizon, painting the sky in brilliant shades of orange, pink, and
+                                        red.
+                                    </p>
+                                    <ul class="sunset-times">
+                                        <li>Sunset Time: <span id="sunset"></span></li>                         
+                                        <li>Dusk Time: <span id="dusk-time"></span></li>
+                                        <li>Last Light Time: <span id="last-light"></span></li>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- My Locations section -->
+
+    <article id="my-locations-section">
+        <!-- My Locations title -->
+        <h3 class="mylocations-title">My Locations</h3>
+
+        <!-- Container that hold 4 cards for My Locations Content that will be populated 
+                    from local storage. -->
+                    <div class="list-group" id="history"></div>
+
+    </article>
+
+    <!-- footer -->
+
+    <footer class="bg-light py-2">
+        <div class="container">
+            <p class="text-center text-muted">&copy; SunTrack 2023</p>
+        </div>
+    </footer>
+
+    <!-- Moment.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <script src="keys.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
