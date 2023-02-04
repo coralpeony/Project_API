@@ -109,7 +109,7 @@ $("#search-button").click(function (event) {
     
 
     // saved to local storage 
-function savedToLS(data, city) {
+function savedToLS(data, cityName) {
   const cities = JSON.parse(localStorage.getItem("location")) || []
   console.log(data[0].display_name, cityName);
   cities.push(data[0].display_name);
@@ -119,12 +119,94 @@ function savedToLS(data, city) {
 
     //a button is generated for the searched city
 
-    function createButton (city) {
-      const button = $('<button class="button">' + city + "</button>");
+    function createButton (cityName) {
+      const button = $('<button class="button">' + cityName + "</button>");
       button.click(getHistory)
       history.append(button)
       
       }
+
+        // stored city name and the data are linked
+
+  function getHistory(event) {
+    const queryParam = $("#search-input").val();
+    city = $("#search-input").val();
+    const location =
+      "https://nominatim.openstreetmap.org/search.php?city=" +
+      queryParam +
+      "&format=jsonv2";
+    console.log(location);
+  
+    if (!queryParam) {
+      return;
+    }
+  
+    fetch(location)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        console.log(data);
+        
+       
+
+      })
+      displayCityData(data);
+    }
+
+    function sunGet(event) {
+      latitude = data[0].lat;
+      longitude = data[0].lon;
+      imageURL =
+        "https://maps.googleapis.com/maps/api/staticmap?center=" +
+        latitude +
+        "%2c%20" +
+        longitude +
+        "8&zoom=12&size=600x600&key=AIzaSyCoIJTitaSal9kU_w5Gz0c-M5epiS69i44";
+
+
+      // call to sunset api
+
+      const sunriseSunset =
+        "https://api.sunrisesunset.io/json?lat=" +
+        latitude +
+        "&lng=" +
+        longitude +
+        "&date=" +
+        date;
+      $.ajax({
+        url: sunriseSunset,
+        method: "GET",
+      }).then(function (sunriseSunsetResponse) {
+        console.log(sunriseSunsetResponse);
+        
+        //saving API response to global scoped variables
+        sunrise = sunriseSunsetResponse.results.sunrise;
+        firstLight = sunriseSunsetResponse.results.first_light;
+        dawn = sunriseSunsetResponse.results.dawn;
+        dusk = sunriseSunsetResponse.results.dusk;
+        lastLight = sunriseSunsetResponse.results.last_light;
+        sunset = sunriseSunsetResponse.results.sunset;
+
+
+        //adds sunrise data to HTML
+        $("#first-light").text(firstLight);
+        $("#sunrise").text(sunrise);
+        $("#dawn-time").text(dawn);
+        $("#dusk-time").text(dusk);
+        $("#last-light").text(lastLight);
+        $("#sunset").text(sunset);
+        $("#map-title").text(city);
+
+        // Card Titles
+
+        $("#sunrise-card").text(city + " Sunrise Information");
+        $("#sunset-card").text(city + " Sunset Information");
+        //map image
+        $("#mapimage").attr("src", imageURL);
+        
+      });
+    }
 
   function displayCityData(data) {
     const cardContainer = $('<div class="myCard">');

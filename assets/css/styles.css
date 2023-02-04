@@ -216,7 +216,19 @@ the elements in the center and creates gap between */
       6. Buttons & Search Form
       ------------------------------------------------
       ----------------------------------------------*/
-
+.button {
+  
+  background-color: rgb(255, 217, 0); 
+  border-radius: 50%;
+  border:#ffcb47;
+  color: #ff7b00e1;
+  margin: 20px;
+  font-size: 18px;
+  shape-outside: circle(50%);
+  width: 100px;
+  height: 100px;
+ 
+}
 /*----------------------------------------------
       ------------------------------------------------
       7. Footer Styles
